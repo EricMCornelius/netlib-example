@@ -14,9 +14,12 @@ int main(int argc, char *argv[]) {
     http::client::request request(argv[1]);
 
     std::string query(argv[2]);
+    /*
     request.add_header(std::make_pair("Content-Length", std::to_string(query.size())));
     request.body(query);
-    http::client::response response = client.post(request);
+    */
+
+    http::client::response response = client.post(request, query, std::string("application/json"));
 
     std::cout << body(response) << std::endl;
   }
