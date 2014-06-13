@@ -1,0 +1,37 @@
+env.compiler_flags = ['-std=c++11', '-O2'];
+
+register({
+  id: 'netlib_example',
+  language: 'c++',
+  type: 'application',
+  defines: ['_GLIBCXX_USE_NANOSLEEP', 'BOOST_NETWORK_ENABLE_HTTPS'],
+  deps: ['netlib']
+});
+
+register({
+  id: 'netlib',
+  language: 'c++',
+  type: 'external',
+  libs: ['cppnetlib-client-connections', 'cppnetlib-uri', 'cppnetlib-server-parsers'],
+  libdirs: ['/usr/local/lib/x86_64-linux-gnu'],
+  includedirs: ['/usr/local/include'],
+  deps: ['boost', 'openssl']
+});
+
+register({
+  id: 'boost',
+  language: 'c++',
+  type: 'external',
+  libs: ['boost_thread', 'boost_system', 'boost_regex', 'boost_date_time', 'boost_random'],
+  libdirs: ['/usr/lib'],
+  includedirs: ['/usr/include']
+});
+
+register({
+  id: 'openssl',
+  language: 'c++',
+  type: 'external',
+  libs: ['ssl', 'crypto'],
+  libdirs: ['/usr/lib'],
+  includedirs: ['/usr/include']
+});

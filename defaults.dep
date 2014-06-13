@@ -1,0 +1,15 @@
+env.compiler = 'g++';
+env.compiler_flags = ['-fconstexpr-depth=8192', '-std=c++11', '-lpthread', '-Wall', 
+                      '-Werror', '-Wno-unused-variable', '-Wno-unused-but-set-variable', '-Wno-comment'];
+env.defines = [];
+
+if (process.env["DEV_BUILD"]) {
+  env.compiler_flags = env.compiler_flags.concat(['-g']);
+  env.lib_type = 'shared_lib';
+  env.linker_flags = ['-lpthread', '-flto'];
+}
+else {
+  env.compiler_flags = env.compiler_flags.concat(['-O3', '-flto']);
+  env.lib_type = 'static_lib';
+  env.linker_flags = ['-lpthread', '-static-libgcc', '-static-libstdc++', '-flto'];
+}
